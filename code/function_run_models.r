@@ -6,6 +6,7 @@ function_run_models <- function(project = FALSE, #This is whether you want to pr
                                 n_years_ahead = c(0), #predictions into the future
                                 n_test = 1,
                                 maxYr = NA,
+                                # file = file,
                                 survey_projection = FALSE,
                                 survey_GRTS_type = NA,
                                 survey_ownership_removed = NA,
@@ -48,7 +49,7 @@ function_run_models <- function(project = FALSE, #This is whether you want to pr
                                       survey_ownership_removed = survey_ownership_removed,
                                       output = output)
   
-  # print(mod_search$sdm$grid_search)
+  print(mod_search$sdm$grid_search)
 
   #Output of model exploration
   print("run model exploration")
@@ -64,6 +65,7 @@ function_run_models <- function(project = FALSE, #This is whether you want to pr
                                survey_GRTS_type =  survey_GRTS_type,
                              survey_pop_type = survey_pop_type,
                              df = df,
+                             # file = file,
                              maxYr = maxYr,
                              n_test = n_test) #is this a projection
   

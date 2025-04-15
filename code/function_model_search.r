@@ -34,8 +34,7 @@ function_model_search <- function(test_years = test_years,
                      form = list(rf = list(), gam=ls(), sdm=list()), 
                      args = list(rf=list(), gam=list(), sdm = list()))
 
-  print("test")
-  
+
   rf_forms <- list(rear = list(
       m1 = formula(gsub("[\r\n\t]", "","dens ~
                       StrmSlope +
@@ -347,7 +346,6 @@ function_model_search <- function(test_years = test_years,
   }
   mod_search$args$gam <- gam_args
   
-  print(gam_args)
   #sdm search
   sdm_forms <- list(rear = list(                  
                     m1 = formula(gsub("[\r\n\t]", "","dens ~ 1 +
@@ -442,6 +440,6 @@ function_model_search <- function(test_years = test_years,
   
   mod_search$args$sdm <- sdm_args
 
-  # print(mod_search)
+  print(mod_search)
   return(mod_search)
 }

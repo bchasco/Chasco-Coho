@@ -9,10 +9,10 @@ library(tidyr)
 library(dplyr)
 
 # Stage <- 'rear' #rear or Spwn
-for(Stage in c('rear','Spwn')){
+for(Stage in c('rear')){
   survey_pop_list <- list("allGrps" = c("no groups")) #These are groups that are left out
 
-  survey_owernship_list <- list("none" = c("none")) #These are groups that are left out
+  survey_owernship_list <- list("Private" = c("Private"), "Public" = c("Public"),"none" = c("none")) #These are groups that are left out
   
   survey_GRTS_list <- list(
     # c("Index")
@@ -39,23 +39,24 @@ for(Stage in c('rear','Spwn')){
             #load the saved output from the original diagnostic model "wrapper_for_running_diagnostic_model.r"
             cat('\n\n')
             file <- paste0("output/",si,"_output_",ss,"_",maxYr,".rdata")
-
+            
             load(file = file)
+            
             #update the new output
             output <- function_run_models(project = proj, #This is whether you want to project into the future. When set to FALSE, n_years_ahead is fixed to zero
                                           survey_projection = survey_projection, #years into the future to project.
                                           survey_GRTS_type = survey_GRTS_list, #which grits design. This is for non-projections
                                           survey_pop_type = survey_pop_list, #which populations to project
+                                          survey_pop = survey_pop_list,
                                           survey_ownership_removed = survey_owernship_list,
                                           no_covars = FALSE, #Deprecated   - whether a covariate only model
                                           save_output = TRUE, #Do you want to save and over-write the output
                                           stage = ss, #Which stage rear or Spwn
                                           mod = mm, # the type of model 'rf', 'gam', 'sdm'
                                           maxYr = maxYr,
-                                          survey_pop = survey_pop_list,
                                           n_years_ahead = n_years_ahead, #predictions into the future, reduces the number of years in the training data set
-                                          n_test = 2) #Number of years in the RMSE model compariso\n, if it's 5 the you're comparing 2015 through 2019
-            #save the updated output
+                                          n_test = 5) #Number of years in the RMSE model compariso\n, if it's 5 the you're comparing 2015 through 2019
+
             file <- paste0("output/ownership_",si,"_output_",ss,"_",maxYr,".rdata")
             save(output, file = file)
           }

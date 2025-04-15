@@ -12,6 +12,7 @@ function_model_exploration <- function(stage = stage,
                               df = df,
                               maxYr = NA,
                               n_test = NA,
+                              # file = file,
                               save_output = FALSE){
   
 
@@ -27,6 +28,7 @@ function_model_exploration <- function(stage = stage,
   # print(search)
   
   # find model with lowest out of sample rmse
+  print(search)
   search$rmse <- 1e6
   search$AIC <- 1e6
 
