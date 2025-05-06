@@ -191,7 +191,7 @@ function_model_exploration <- function(stage = stage,
         pred <- predict(fit,
                                  test,
                                  re_form_iid = NA)
-        print(pred[pred$yr==search$test_years[i],])
+        # print(pred[pred$yr==search$test_years[i],])
         pred <- tryCatch(predict(fit,
                         test,
                         re_form_iid = NA),
@@ -222,7 +222,7 @@ function_model_exploration <- function(stage = stage,
         pred <- predict(fit, test)
         # print(table(train$yr))
         # print(table(test$yr))
-        print(pred)
+        # print(pred)
         search$rmse[i] = sqrt(mean(((pred-test$dens)[test$yr == search$test_years[i]])^2))
       }
 
@@ -355,6 +355,11 @@ function_model_exploration <- function(stage = stage,
                                  best_mod = output$exploratory$sdm$best_mod,
                                  best_fit = output$exploratory$sdm$best_fit,
                                  grid_search = search)
+      output$project$sdm$data[[i]] <- list(df = df,
+                                 train = train,
+                                 test = test)
+      output$project$sdm$pred[[as.character(search$test_years[i])]] <- list(pred = pred)
+      
     }
     if(save_output){
       # print("saving output")

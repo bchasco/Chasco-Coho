@@ -9,15 +9,20 @@ library(tidyr)
 library(dplyr)
 
 # Stage <- 'rear' #rear or Spwn
-for(Stage in c('rear')){
-  survey_pop_list <- list("allGrps" = c("no groups")) #These are groups that are left out
+for(Stage in c('Spwn')){
+  survey_pop_list <- list("unsampled" = c('Tillamook Bay', 'Nestucca', 'Necanicum', 'Yaquina', 'Siletz', 'Salmon', 'Alsea', 'Lower Umpqua', 'Beaver', 'Tenmile', 'Siltcoos', 'Tahkenitch', 'North Umpqua', 'Middle Umpqua', 'Coos', 'Floras', 'Sixes')) #These are groups that are left out
 
-  survey_owernship_list <- list("Private" = c("Private"), "Public" = c("Public"),"none" = c("none")) #These are groups that are left out
+  # study_pops <- c('Nehalem', 'Alsea', 'Coos', 'Lower Umpqua') # Designate the Populations that are left ****OUT******** of the scenario analysis!!!!!!!
+  survey_owernship_list <- list("none" = c("none")) #These are groups that are left out
+  # For Scenario 8 this would be 'Largest Basins Only' - ****INCLUDE c("Nehalem", "Siuslaw", "Coquille", "South Umpqua") 
+  # study_pops <- c('Tillamook Bay', 'Nestucca', 'Necanicum', 'Yaquina', 'Siletz', 'Salmon', 'Alsea', 'Lower Umpqua', 'Beaver', 'Tenmile', 'Siltcoos', 'Tahkenitch', 'North Umpqua', 'Middle Umpqua', 'Coos', 'Floras', 'Sixes')
+  
+  survey_owernship_list <- list("none" = c("none")) #These are groups that are left out
   
   survey_GRTS_list <- list(
     # c("Index")
     # c("annual","annua")
-    # ,c("annual","annua","three")
+    # c("annual","annua","three")
     c("annua","annual","Index","nine","once","Supplemental","three")
   )
   
@@ -55,7 +60,7 @@ for(Stage in c('rear')){
                                           mod = mm, # the type of model 'rf', 'gam', 'sdm'
                                           maxYr = maxYr,
                                           n_years_ahead = n_years_ahead, #predictions into the future, reduces the number of years in the training data set
-                                          n_test = 5) #Number of years in the RMSE model compariso\n, if it's 5 the you're comparing 2015 through 2019
+                                          n_test = 1) #Number of years in the RMSE model compariso\n, if it's 5 the you're comparing 2015 through 2019
 
             file <- paste0("output/ownership_",si,"_output_",ss,"_",maxYr,".rdata")
             save(output, file = file)
@@ -65,3 +70,5 @@ for(Stage in c('rear')){
     }
   }
 }
+
+load(paste0("output/ownership_",si,"_output_",ss,"_",maxYr,".rdata"))

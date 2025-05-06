@@ -14,13 +14,13 @@ for(Stage in c('rear')){
 
   survey_GRTS_list <- list(
     # c("Index")
-    c("annual","annua")
-    ,c("annual","annua","three")
-    ,c("annua","annual","Index","nine","once","Supplemental","three")
+    # c("annual","annua")
+    # ,c("annual","annua","three")
+    c("annua","annual","Index","nine","once","Supplemental","three")
   )
   
   for(maxYr in c(2021)){ #The maximum year of information to use. For either spawner or adults.
-    for(proj in c(TRUE)){ #FALSE means your just exploring. FALSE will determine which GAM, RF, GLMM model fits the data the best.
+    for(proj in c(FALSE)){ #FALSE means your just exploring. FALSE will determine which GAM, RF, GLMM model fits the data the best.
       for(mm in c('gam','sdm','rf')){ #model
         for(ss in Stage){ #life stage
           for(si in c('temporal')){ #testing models based on survey design or temporal forecasting, **** Both can be run from 'spatial' by looping over proj <- c(TRUE,FALSE)

@@ -41,13 +41,12 @@ function_wrangle_data <- function(stage=NA, #life stage you're interested in
     # filter_at(vars(UTM_E, UTM_N), all_vars(!is.na(.)))
   
   sp <- sp[sp$yr<=maxYr,]
-
   sp_ownership <- read.csv(paste0('C:/noaa/LARGE_Data/spawner_ownership.csv'))
-  
-  
+
   sp <- sp %>%
-    left_join(sp_ownership, by = "SiteID", relationship = "many-to-many")
-  
+    left_join(sp_ownership, by = "SiteID", relationship = "many-to-many") %>% 
+    distinct()
+
   #row bind the data based on common column headings
   depVars <- c('STRM_ORDER','LifeStage','dens','yr','PopGrp','ID_Num')
   if(stage=="rear"){
